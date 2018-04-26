@@ -64,7 +64,7 @@ public class kfoldCrossValidation {
         double w = (testRatio*totalData);
         double ratio = error/w;
         System.out.println(error);
-        System.out.println(w);
+        //System.out.println(w);
         System.out.println("Final Result "+ratio);
         }
     }
