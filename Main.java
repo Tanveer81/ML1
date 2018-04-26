@@ -83,9 +83,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        /*for(Set<Double> a : attributes2){
+        for(Set<Double> a : attributes2){
             System.out.println(a);
-        }*/
+        }
 
         //System.out.println(job);//debug
         System.out.println(i);//debug
@@ -124,7 +124,7 @@ public class Main {
         }*/
 
         //calling kfoldcrossvalidation
-        kfoldCrossValidation kf = new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5);
+        kfoldCrossValidation kf = new kfoldCrossValidation(dataset,attributes,attributes2,min,max,20);
 
     }
 }

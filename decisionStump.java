@@ -27,7 +27,7 @@ public class decisionStump {
         result = new String[train.length];
         resample(train, w);
         attr = minEntropyAttribute();
-        System.out.println("attr "+attr);
+        //System.out.println("attr "+attr);
         if(attr < 10){
             //numeric
             double avg =  (max[attr]+min[attr])/2;
@@ -122,6 +122,8 @@ public class decisionStump {
 
     double entropyNumerical(int attr){
         double entropy = 0;
+        //Arrays.fill(yes[attr],1);
+        //Arrays.fill(no[attr],1);
         double avg =  (max[attr]+min[attr])/2;
         int debug = 0;
         for (int i = 0; i < resampled.length; i++) {
@@ -135,20 +137,25 @@ public class decisionStump {
             }
         }
 
-        if((yes[attr][0] + no[attr][0] == 0)){entropy = Double.MAX_VALUE;}
+        if((yes[attr][0] + no[attr][0] == 0)){entropy = 0;}
         else {
             double yesRatio = yes[attr][0] / (yes[attr][0] + no[attr][0]);
             double noRatio = no[attr][0] / (yes[attr][0] + no[attr][0]);
-            entropy -= yesRatio * log2(yesRatio);
-            entropy -= noRatio * log2(noRatio);
+            if(yes[attr][0] > 0)entropy -= yesRatio * log2(yesRatio);
+            if(no[attr][0] > 0)entropy -= noRatio * log2(noRatio);
         }
         if((yes[attr][1] + no[attr][1] == 0)){entropy = Double.MAX_VALUE;}
         else {
             double yesRatio = yes[attr][1] / (yes[attr][1] + no[attr][1]);
             double noRatio = no[attr][1] / (yes[attr][1] + no[attr][1]);
-            entropy -= yesRatio * log2(yesRatio);
-            entropy -= noRatio * log2(noRatio);
+            if(yes[attr][1] > 0)entropy -= yesRatio * log2(yesRatio);
+            if(no[attr][1] > 0)entropy -= noRatio * log2(noRatio);
         }
+
+        double q = yes[attr][0] + no[attr][0] + yes[attr][1] + no[attr][1];
+        entropy *=q;
+        entropy /= (double)resampled.length;
+
         //System.out.println("debug "+debug);
         return entropy;
     }
@@ -179,13 +186,16 @@ public class decisionStump {
         b=0;
         for(String a : set.get(attr-10)) {
             if (stringYes[attr - 10][b] + stringNo[attr - 10][b] == 0) {
-                entropy = Double.MAX_VALUE;
+               entropy = 0;
             }
             else{
                 double yesRatio = stringYes[attr - 10][b] / (stringYes[attr - 10][b] + stringNo[attr - 10][b]);
                 double noRatio = stringNo[attr - 10][b] / (stringYes[attr - 10][b] + stringNo[attr - 10][b]);
-                entropy -= yesRatio * log2(yesRatio);
-                entropy -= noRatio * log2(noRatio);
+                if(stringYes[attr - 10][b] > 0)entropy -= yesRatio * log2(yesRatio);
+                if(stringNo[attr - 10][b] > 0)entropy -= noRatio * log2(noRatio);
+                double q = stringYes[attr - 10][b] + stringNo[attr - 10][b];
+                entropy *=q;
+                entropy /= (double)resampled.length;
             }
             b++;
         }

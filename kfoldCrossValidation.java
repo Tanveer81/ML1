@@ -8,7 +8,7 @@ public class kfoldCrossValidation {
     Double[] min,max;
     int folds;
 
-    public kfoldCrossValidation(featureVector[] ds, ArrayList<Set<String>> attr,ArrayList<Set<Double>> attr2, Double[] min, Double[] max,int folds) {
+    public kfoldCrossValidation(featureVector[] ds, ArrayList<Set<String>> attr, ArrayList<Set<Double>> attr2, Double[] min, Double[] max,int folds) {
         this.dataset = ds;
         this.attributes = attr;
         this.attributes2 = attr2;
@@ -41,10 +41,11 @@ public class kfoldCrossValidation {
                         p++;
                     }
                 }
+                //adaBoost ab = new adaBoost(train, attributes , min , max , 10);
             }
 
         //test
-        adaBoost ab = new adaBoost(train, attributes , attributes2 , min , max , 2);
+        adaBoost ab = new adaBoost(train, attributes , attributes2 , min , max , 30);
         double[] r = new double[(int) (testRatio*totalData)];
         for (int it = 0; it < testRatio*totalData; it++) {
             double c = ab.decision(test[it]);
@@ -56,13 +57,16 @@ public class kfoldCrossValidation {
         for (int ii = 0; ii < testRatio*totalData; ii++) {
             //System.out.println(r[ii]);
             //System.out.println(test[ii].f[20].string);
-            if(r[ii] <= 0 && test[ii].f[20].string.equals("yes"))error++;
+            if(r[ii] < 0 && test[ii].f[20].string.equals("yes"))error++;
             else if(r[ii] > 0 && test[ii].f[20].string.equals("no"))error++;
         }
 
-        double ratio = error/(testRatio*totalData);
+        double w = (testRatio*totalData);
+        double ratio = error/w;
         System.out.println(error);
+        System.out.println(w);
         System.out.println("Final Result "+ratio);
         }
     }
+
 }

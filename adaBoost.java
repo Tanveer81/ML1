@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Set;
 
 public class adaBoost {
@@ -20,10 +21,10 @@ public class adaBoost {
         while( k < boost) {
             decisionStump ds = new decisionStump(train, w, attr, attr2, min, max);
             r++;
-            System.out.print(r +" ->");
+            //System.out.print(r +" ->");
             Double ratio = Double.valueOf(ds.error) / Double.valueOf(numberOftraining);
-            System.out.println(ds.attr);
-            System.out.println(ratio);
+            //System.out.println(ds.attr);
+            //System.out.println(ratio);
             if (ratio < .5) {
                 h[k] = ds;
                 double error = 0.0;
@@ -62,10 +63,17 @@ public class adaBoost {
 
     double decision(featureVector fv){
         double r = 1.0;
-        for (int i = 0; i < boost; i++) {
-            double c = h[i].decision(fv);
-            r *= z[i]*c;
+        if(boost == 1){
+            double c = h[0].decision(fv);
+            r *= z[0] * c;
         }
+        else{
+            for (int i = 0; i < boost; i++) {
+                double c = h[i].decision(fv);
+                r *= z[i] * c;
+            }
+        }
+        if(r<0)r=-1;
         return r;
     }
 
