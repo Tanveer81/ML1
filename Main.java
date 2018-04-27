@@ -1,12 +1,12 @@
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import com.opencsv.CSVReader;
 
 public class Main {
     public static void main(String[] args) {
         CSVReader reader = null;
-        featureVector fv[] = new featureVector[50000];
+        featureVector fv[] = new featureVector[41188];
         ArrayList<Set<String>> attributes = new ArrayList<Set<String>>();
         for(int i = 0; i<11; i++){
             Set<String> a = new HashSet<String>();
@@ -29,8 +29,8 @@ public class Main {
             reader = new CSVReader(new FileReader("E:\\L-4 T-2\\ML Sessional\\Offline1\\src\\bank-additional-full.csv"), ';');//
             String[] line;
             line = reader.readNext();//reading first line description
-            for (int k = 0; k < 21; k++) System.out.print(line[k] + " ");
-            System.out.println();
+            //for (int k = 0; k < 21; k++) System.out.print(line[k] + " ");
+            //System.out.println();
 
             while ((line = reader.readNext()) != null) {
                 featureVector f = new featureVector();
@@ -75,46 +75,74 @@ public class Main {
                     attributes.get(y-10).add(f.f[y].string);
                 }
 
-
-
                 i++;
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
 
-        for(Set<Double> a : attributes2){
-            System.out.println(a);
-        }
+        //for(Set<Double> a : attributes2)System.out.println(a);
+
 
         //System.out.println(job);//debug
-        System.out.println(i);//debug
+        System.out.println("Total Data : "+i);//debug
         featureVector[] dataset = new featureVector[9280];
+        featureVector[] yesSet = new featureVector[4640];
+        featureVector[] noSet = new featureVector[4640];
+
         int yes = 0;
         int no = 0;
         String q = new String("yes");
         String w = new String("no");
         for(int t=0;t<i;t++){ //adding all yes class
             if(fv[t].f[20].string.equals(q)) {
-                dataset[2 * yes] = fv[t];
+                yesSet[yes] = fv[t];
                 yes++;
             }
         }
-        System.out.println(yes);//debug
-        //System.out.println(dataset[9278].f[20].string);//debug y
-
-        //List<Integer> array = new ArrayList< >();
+        for(int t=0;t<i;t++){ //adding all no class
+            if(fv[t].f[20].string.equals(w)) {
+                noSet[no] = fv[t];
+                no++;
+                if(no == 4640){break;}
+            }
+        }
+/*        List<Integer> array = new ArrayList< >();
         Random rn = new Random();
         while(no<yes){ //adding same number of no class randomly
             int  n = rn.nextInt(i);
-            //if(!array.contains(n)) {
-                //array.add(n);
-                if (fv[n].f[20].string.equals(w)) { //y
+            if(!array.contains(n)) {
+                array.add(n);
+                if (fv[n].f[20].string.equals(w)) { //no
+                    noSet[no] = fv[n];
+                    no++;
+                }
+            }
+        }*/
+
+        for(int t=0;t<4640;t++){ //adding all class
+            dataset[2*t] = yesSet[t];
+            dataset[2*t+1] = noSet[t];
+        }
+       Collections.shuffle(Arrays.asList(dataset));
+
+        System.out.println("Number of yes : "+yes);//debug
+        //System.out.println(dataset[9278].f[20].string);//debug y
+
+/*        List<Integer> array = new ArrayList< >();
+        Random rn = new Random();
+        while(no<yes){ //adding same number of no class randomly
+            int  n = rn.nextInt(i);
+            if(!array.contains(n)) {
+                array.add(n);
+                if (fv[n].f[20].string.equals(w)) { //no
                     dataset[2 * no + 1] = fv[n];
                     no++;
-                //}
+                }
             }
-        }
+        }*/
+
+        System.out.println("Number of no : "+no);//debug
 
         /*for(int t=0;t<yes*2;t++){
             System.out.print(t+1+"-> ");
@@ -124,57 +152,31 @@ public class Main {
         }*/
 
         //calling kfoldcrossvalidation
-        kfoldCrossValidation kf = new kfoldCrossValidation(dataset,attributes,attributes2,min,max,20);
+        int folds = 5;
+        int boost = 5;
+        System.out.println("Number Of Folds : "+folds);
+        try{
+        Writer output;
+        String fileName = "E:\\L-4 T-2\\ML Sessional\\Offline1\\src\\result.txt";
+        output = new BufferedWriter(new FileWriter(fileName,true));
+        output.append("\n");
+        output.close();}catch(Exception e){}
+
+
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5,1);
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5,5);
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5,10);
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5,20);
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,5,30);
+
+        new kfoldCrossValidation(dataset,attributes,attributes2,min,max,10,5);
+       new kfoldCrossValidation(dataset,attributes,attributes2,min,max,20,5);
+
+
+
+
+
 
     }
+
 }
-
-
-
-
-//numeric
-                /*f.age  = Double.parseDouble(line[0]);
-                f.campaign  = Double.parseDouble(line[11]);
-                f.consPriceIndex  = Double.parseDouble(line[16]);
-                f.consConIndex  = Double.parseDouble(line[17]);
-                f.duration  = Double.parseDouble(line[10]);
-                f.empVarRate  = Double.parseDouble(line[15]);
-                f.euribor3m  = Double.parseDouble(line[18]);
-                f.nrEmployees  = Double.parseDouble(line[19]);
-                f.pdays  = Double.parseDouble(line[12]);
-                f.previous  = Double.parseDouble(line[13]);*/
-
-
-//strings
-                /*f.contact = line[7];
-                f.dayOfWeek = line[9];
-                f.dfault = line[4];
-                f.education = line[3];
-                f.housing = line[5];
-                f.job = line[1];
-                f.loan = line[6];
-                f.marital = line[2];
-                f.month = line[8];
-                f.pOutCome = line[14];
-                f.y = line[20];*/
-
-
-
-
-
-
-/*
-"age";"job";"marital";"education";"default";"housing";"loan";"contact";"month";"day_of_week";"duration";"campaign";"pdays";
-"previous";"poutcome";"emp.var.rate";"cons.price.idx";"cons.conf.idx";"euribor3m";"nr.employed";"y"
- */
-
-/*
-1.6;Pankaj Kumar;20;India
-        2;David Dan;40.9;USA
-        3;Lisa Ray;28;Germany
-
-
-
-56;"housemaid";"married";"basic.4y";"no";"no";"no";"telephone";"may";"mon";261;1;999;0;"nonexistent";1.1;93.994;-36.4;4.857;5191;"no"
-57;"services";"married";"high.school";"unknown";"no";"no";"telephone";"may";"mon";149;1;999;0;"nonexistent";1.1;93.994;-36.4;4.857;5191;"no"
-        */

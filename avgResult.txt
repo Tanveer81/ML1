@@ -1,0 +1,88 @@
+
+Taking No from the beginning of the DataSet
+
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.9073521807273508
+Folds : 5  Boost : 5  Avg F1 Score : 0.9435385664460841
+Folds : 5  Boost : 10  Avg F1 Score : 0.9435385664460841
+Folds : 5  Boost : 20  Avg F1 Score : 0.9284475172087968
+Folds : 5  Boost : 30  Avg F1 Score : 0.9284475172087968
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.9435385664460841
+Folds : 10  Boost : 5  Avg F1 Score : 0.9319709517836038
+Folds : 20  Boost : 5  Avg F1 Score : 0.9330227183478654
+
+
+
+Taking no randomly from DataSet
+
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.48768448853918256
+Folds : 5  Boost : 5  Avg F1 Score : 0.5773284349173519
+Folds : 5  Boost : 10  Avg F1 Score : 0.6075399783214397
+Folds : 5  Boost : 20  Avg F1 Score : 0.583657373193214
+Folds : 5  Boost : 30  Avg F1 Score : 0.5846959081017882
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.5773284349173519
+Folds : 10  Boost : 5  Avg F1 Score : 0.5748626317313614
+Folds : 20  Boost : 5  Avg F1 Score : 0.5634773996529849
+
+
+Taking No from the beginning of the DataSet
+
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.9073565268771769
+Folds : 5  Boost : 5  Avg F1 Score : 0.931101921025581
+Folds : 5  Boost : 10  Avg F1 Score : 0.931101921025581
+Folds : 5  Boost : 20  Avg F1 Score : 0.9179573968856231
+Folds : 5  Boost : 30  Avg F1 Score : 0.9136413322474746
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.931101921025581
+Folds : 10  Boost : 5  Avg F1 Score : 0.9339731628637236
+Folds : 20  Boost : 5  Avg F1 Score : 0.9273883355399022
+
+
+Taking no randomly from DataSet
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.4546631686913746
+Folds : 5  Boost : 5  Avg F1 Score : 0.5716594571528443
+Folds : 5  Boost : 10  Avg F1 Score : 0.5909825815552044
+Folds : 5  Boost : 20  Avg F1 Score : 0.5891418835319224
+Folds : 5  Boost : 30  Avg F1 Score : 0.6134179938601702
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.5716594571528443
+Folds : 10  Boost : 5  Avg F1 Score : 0.5787569730192933
+Folds : 20  Boost : 5  Avg F1 Score : 0.5896877024212175
+
+
+Taking no randomly from DataSet
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.45599144305996053
+Folds : 5  Boost : 5  Avg F1 Score : 0.5973365294083949
+Folds : 5  Boost : 10  Avg F1 Score : 0.6052911824156604
+Folds : 5  Boost : 20  Avg F1 Score : 0.6164623018782727
+Folds : 5  Boost : 30  Avg F1 Score : 0.6036961781201305
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.5973365294083949
+Folds : 10  Boost : 5  Avg F1 Score : 0.5909954530146609
+Folds : 20  Boost : 5  Avg F1 Score : 0.5904021306200551
+
+
+Taking No from the beginning of the DataSet
+
+#Changing Boosts
+Folds : 5  Boost : 1  Avg F1 Score : 0.9072960892810278
+Folds : 5  Boost : 5  Avg F1 Score : 0.93305838488592
+Folds : 5  Boost : 10  Avg F1 Score : 0.93305838488592
+Folds : 5  Boost : 20  Avg F1 Score : 0.9097827403748815
+Folds : 5  Boost : 30  Avg F1 Score : 0.9125236671012622
+
+#Changing Folds
+Folds : 5  Boost : 5  Avg F1 Score : 0.93305838488592
+Folds : 10  Boost : 5  Avg F1 Score : 0.9317739799780741
+Folds : 20  Boost : 5  Avg F1 Score : 0.9318244104556612
